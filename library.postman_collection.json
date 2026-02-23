@@ -1,0 +1,135 @@
+{
+  "info": {
+    "_postman_id": "6798ef1f-d886-4c8a-9896-a8644cfed29e",
+    "name": "library",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "48310124",
+    "_collection_link": "https://go.postman.co/collection/48310124-6798ef1f-d886-4c8a-9896-a8644cfed29e?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Addbook",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "    pm.response.to.have.jsonBody(\"Msg\");\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n\"name\": \"Learn Appium Autonation with Java\",\r\n\"isbn\":\"baacd\",\r\n\"aisle\": \"227\",\r\n\"author\": \"John foe\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/Library/Addbook.php",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "Library",
+            "Addbook.php"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GetBook",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseURL}}/Library/GetBook.php?ID=baacd227",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "Library",
+            "GetBook.php"
+          ],
+          "query": [
+            {
+              "key": "ID",
+              "value": "baacd227"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"ID\": \"baacd227\"\r\n}"
+        },
+        "url": {
+          "raw": "{{baseURL}}/Library/Deletebook.php",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "Library",
+            "Deletebook.php"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ]
+}
