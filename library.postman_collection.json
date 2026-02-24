@@ -3,45 +3,39 @@
     "_postman_id": "6798ef1f-d886-4c8a-9896-a8644cfed29e",
     "name": "library",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "_exporter_id": "48310124",
-    "_collection_link": "https://go.postman.co/collection/48310124-6798ef1f-d886-4c8a-9896-a8644cfed29e?source=collection_link"
+    "_exporter_id": "48310124"
   },
   "item": [
     {
       "name": "Addbook",
       "event": [
         {
-          "listen": "prerequest",
-          "script": {
-            "exec": [
-              ""
-            ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
-          }
-        },
-        {
           "listen": "test",
           "script": {
-            "exec": [
-              "pm.test(\"Status code is 200\", function () {\r",
-              "    pm.response.to.have.status(200);\r",
-              "    pm.response.to.have.jsonBody(\"Msg\");\r",
-              "});"
-            ],
             "type": "text/javascript",
-            "packages": {},
-            "requests": {}
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test(\"Response has Msg\", function () {",
+              "    pm.response.to.have.jsonBody(\"Msg\");",
+              "});"
+            ]
           }
         }
       ],
       "request": {
         "method": "POST",
-        "header": [],
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
         "body": {
           "mode": "raw",
-          "raw": "{\r\n\"name\": \"Learn Appium Autonation with Java\",\r\n\"isbn\":\"baacd\",\r\n\"aisle\": \"227\",\r\n\"author\": \"John foe\"\r\n}",
+          "raw": "{\n\"name\": \"Learn Appium Automation with Java\",\n\"isbn\":\"baacd\",\n\"aisle\": \"227\",\n\"author\": \"John foe\"\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -49,32 +43,39 @@
           }
         },
         "url": {
-          "raw": "{{base_url}}/Library/Addbook.php",
-          "host": [
-            "{{base_url}}"
-          ],
-          "path": [
-            "Library",
-            "Addbook.php"
-          ]
+          "raw": "{{baseURL}}/Library/Addbook.php",
+          "host": ["{{baseURL}}"],
+          "path": ["Library", "Addbook.php"]
         }
       },
       "response": []
     },
     {
       "name": "GetBook",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test(\"Response is array\", function () {",
+              "    pm.expect(pm.response.json()).to.be.an('array');",
+              "});"
+            ]
+          }
+        }
+      ],
       "request": {
         "method": "GET",
         "header": [],
         "url": {
           "raw": "{{baseURL}}/Library/GetBook.php?ID=baacd227",
-          "host": [
-            "{{baseURL}}"
-          ],
-          "path": [
-            "Library",
-            "GetBook.php"
-          ],
+          "host": ["{{baseURL}}"],
+          "path": ["Library", "GetBook.php"],
           "query": [
             {
               "key": "ID",
@@ -86,50 +87,87 @@
       "response": []
     },
     {
-      "name": "Delete",
+      "name": "UpdateBook",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test(\"Update successful\", function () {",
+              "    pm.response.to.have.jsonBody(\"Msg\");",
+              "});"
+            ]
+          }
+        }
+      ],
       "request": {
         "method": "POST",
-        "header": [],
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
         "body": {
           "mode": "raw",
-          "raw": "{\r\n  \"ID\": \"baacd227\"\r\n}"
+          "raw": "{\n  \"ID\": \"baacd227\",\n  \"author\": \"John Updated\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
         },
         "url": {
-          "raw": "{{baseURL}}/Library/Deletebook.php",
-          "host": [
-            "{{baseURL}}"
-          ],
-          "path": [
-            "Library",
-            "Deletebook.php"
-          ]
+          "raw": "{{baseURL}}/Library/UpdateBook.php",
+          "host": ["{{baseURL}}"],
+          "path": ["Library", "UpdateBook.php"]
         }
       },
       "response": []
-    }
-  ],
-  "event": [
-    {
-      "listen": "prerequest",
-      "script": {
-        "type": "text/javascript",
-        "packages": {},
-        "requests": {},
-        "exec": [
-          ""
-        ]
-      }
     },
     {
-      "listen": "test",
-      "script": {
-        "type": "text/javascript",
-        "packages": {},
-        "requests": {},
-        "exec": [
-          ""
-        ]
-      }
+      "name": "Delete",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test(\"Delete successful\", function () {",
+              "    pm.response.to.have.jsonBody(\"msg\");",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"ID\": \"baacd227\"\n}"
+        },
+        "url": {
+          "raw": "{{baseURL}}/Library/Deletebook.php",
+          "host": ["{{baseURL}}"],
+          "path": ["Library", "Deletebook.php"]
+        }
+      },
+      "response": []
     }
   ]
 }
